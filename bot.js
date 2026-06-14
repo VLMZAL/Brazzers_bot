@@ -14,7 +14,6 @@ const PORT = process.env.PORT || 3000;
 const express = require("express");
 const multer = require("multer");
 const fs = require("fs");
-const sharp = require("sharp");
 const { Client, GatewayIntentBits } = require("discord.js");
 
 // =========================
@@ -22,10 +21,7 @@ const { Client, GatewayIntentBits } = require("discord.js");
 // =========================
 
 const bot = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages
-  ]
+  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages]
 });
 
 bot.once("ready", () => {
@@ -42,51 +38,26 @@ const app = express();
 const upload = multer({ dest: "uploads/" });
 
 app.post("/upload", upload.single("file"), async (req, res) => {
-  console.log("📥 Richiesta /upload ricevuta");
-
   try {
-    if (!req.file) {
-      console.error("❌ Nessun file ricevuto");
-      return res.json({ ok: false });
-    }
+    // Path of the uploaded file (any type)
+    const filePath = req.file.path;
 
-    const inputPath = req.file.path;
-    const outputPath = inputPath + ".png";
+    // Fetch channel
+    const channel = await bot.channels.fetch(CHANNEL_ID);
 
-    console.log("🖼 Converto il file in PNG...");
+    // Send file as-is
+    await channel.send({
+      content: `<@&${ROLE_ID}> **War Status Update**`,
+      files: [filePath]
+    });
 
-    await sharp(inputPath).png().toFile(outputPath);
-    fs.unlinkSync(inputPath);
+    // Delete file after sending
+    fs.unlinkSync(filePath);
 
-    console.log("📡 Cerco il canale:", CHANNEL_ID);
-
-    let channel;
-    try {
-      channel = await bot.channels.fetch(CHANNEL_ID);
-      console.log("✔ Canale trovato:", channel.id);
-    } catch (err) {
-      console.error("❌ ERRORE fetch canale:", err);
-      return res.json({ ok: false });
-    }
-
-    console.log("📤 Invio messaggio al canale...");
-
-    try {
-      await channel.send({
-        content: `<@&${ROLE_ID}> **War Status Update**`,
-        files: [outputPath]
-      });
-      console.log("✅ Messaggio inviato");
-    } catch (err) {
-      console.error("❌ ERRORE invio messaggio:", err);
-      return res.json({ ok: false });
-    }
-
-    fs.unlinkSync(outputPath);
     res.json({ ok: true });
 
   } catch (err) {
-    console.error("❌ ERRORE GENERALE:", err);
+    console.error("File upload error:", err);
     res.json({ ok: false });
   }
 });
