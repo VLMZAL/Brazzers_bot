@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require("discord.js");
-const {fs} = require("fs");
-const {path} = require("path");
-
+const fs = require("fs");
+const path = require("path");
+let tips;
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("tips")
