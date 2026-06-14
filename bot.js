@@ -1,3 +1,7 @@
+DISCORD_TOKEN= process.env.DISCORD_TOKEN;
+CHANNEL_ID = process.env.CHANNEL_ID;
+PORT = process.env.PORT || 3000;
+
 // =========================
 // IMPORTS
 // =========================
