@@ -32,40 +32,6 @@ bot.once("ready", () => {
 bot.login(DISCORD_TOKEN);
 
 // =========================
-// COMMAND LOADER
-// =========================
-
-const path = require("path");
-bot.commands = new Map();
-
-const commandsPath = path.join(__dirname, "commands");
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith(".js"));
-
-for (const file of commandFiles) {
-  const command = require(`./commands/${file}`);
-  bot.commands.set(command.name, command);
-  console.log("Loaded command:", command.name);
-}
-
-
-bot.on("messageCreate", async (message) => {
-  if (message.author.bot) return;
-
-  const args = message.content.split(" ");
-  const commandName = args.shift().toLowerCase();
-
-  const command = bot.commands.get(commandName);
-  if (!command) return;
-
-  try {
-    await command.execute(message, args);
-  } catch (err) {
-    console.error("Command error:", err);
-  }
-});
-
-
-// =========================
 // EXPRESS SERVER
 // =========================
 
