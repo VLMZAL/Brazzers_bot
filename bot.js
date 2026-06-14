@@ -94,3 +94,35 @@ app.post("/upload", upload.single("file"), async (req, res) => {
 app.listen(PORT, () => {
   console.log("🚀 Server running on port", PORT);
 });
+
+
+// =========================
+// DISCORD COMMANDS (ALL HERE)
+// =========================
+
+bot.on("messageCreate", async (message) => {
+  if (message.author.bot) return;
+
+  if (message.content === "/game tips") {
+    return message.reply("always check the map before moving! 🗺️");
+  }
+    options.addStringOption(option => {
+      option.setName("war-tips")
+        .setDescription("war-specific tips")
+        .setRequired(true);
+      return option;
+    });
+
+    options.addStringOption(option => {
+      option.setName("general-tips")
+        .setDescription("General game tips")
+        .setRequired(true);
+      return option;
+    });
+      
+        
+
+
+ 
+
+});
