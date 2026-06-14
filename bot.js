@@ -14,6 +14,7 @@ const PORT = process.env.PORT || 3000;
 const express = require("express");
 const multer = require("multer");
 const fs = require("fs");
+const sharp = require("sharp");
 const { Client, GatewayIntentBits } = require("discord.js");
 
 // =========================
@@ -39,21 +40,25 @@ const upload = multer({ dest: "uploads/" });
 
 app.post("/upload", upload.single("file"), async (req, res) => {
   try {
-    // Path of the uploaded file (any type)
-    const filePath = req.file.path;
+    const inputPath = req.file.path;
+    const outputPath = inputPath + ".png";
 
-    // Fetch channel
+    // Convert to PNG
+    await sharp(inputPath)
+      .png()
+      .toFile(outputPath);
+
+    // Remove original file
+    fs.unlinkSync(inputPath);
+
     const channel = await bot.channels.fetch(CHANNEL_ID);
 
-    // Send file as-is
     await channel.send({
-      content: `<@&${ROLE_ID}> **New Update**`,
-      files: [filePath]
+      content: `<@&${ROLE_ID}> **War Status Update**`,
+      files: [outputPath]
     });
 
-    // Delete file after sending
-    fs.unlinkSync(filePath);
-
+    fs.unlinkSync(outputPath);
     res.json({ ok: true });
 
   } catch (err) {
