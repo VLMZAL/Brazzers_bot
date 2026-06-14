@@ -20,14 +20,16 @@ module.exports = {
     let tips;
 
     if (type === "war") {
-      const filePath = path.join(__dirname, "tips/war_text.txt");
-      tips = fs.readFileSync(filePath, "utf8");
+      await interaction.reply({ "content": "Here are some war tips:",
+        files: ["/tips/war_tips.png"]
+      });
 
     } else if (type === "general") {
       const filePath = path.join(__dirname, "tips/general_text.txt");
       tips = fs.readFileSync(filePath, "utf8");
 
+      await interaction.reply({ content: `Here are some general tips: ${tips}` });
     }
-    await interaction.reply({ content: `Here are some **${type}** tips: ${tips}` });
+    
   }
 };
