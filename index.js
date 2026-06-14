@@ -30,12 +30,12 @@ for (const file of commandFiles) {
 }
 
 async function registerCommands() {
-    const rest = new REST({ version: "10" }).setToken(process.env.DISCORD_TOKEN);
+    const rest = new REST({ version: "10" }).setToken(DISCORD_TOKEN);
 
     try {
         console.log("Updating commands...");
         await rest.put(
-            Routes.applicationGuildCommands(process.env.APP_ID, process.env.SERVER_ID),
+            Routes.applicationGuildCommands(APP_ID, SERVER_ID),
             { body: commandsJSON }
         );
         console.log("Commands updated!");
@@ -64,4 +64,4 @@ client.on("interactionCreate", async interaction => {
     }
 });
 
-client.login(process.env.DISCORD_TOKEN);
+client.login(DISCORD_TOKEN);
