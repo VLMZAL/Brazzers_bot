@@ -47,7 +47,7 @@ app.post("/upload", upload.single("file"), async (req, res) => {
 
     // Send file as-is
     await channel.send({
-      content: `<@&${ROLE_ID}> **War Status Update**`,
+      content: `<@&${ROLE_ID}> **New Update**`,
       files: [filePath]
     });
 
