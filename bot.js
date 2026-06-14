@@ -95,10 +95,4 @@ bot.on("messageCreate", async (message) => {
         .setRequired(true);
       return option;
     });
-      
-        
-
-
- 
-
 });
