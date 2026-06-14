@@ -32,6 +32,40 @@ bot.once("ready", () => {
 bot.login(DISCORD_TOKEN);
 
 // =========================
+// COMMAND LOADER
+// =========================
+
+const path = require("path");
+bot.commands = new Map();
+
+const commandsPath = path.join(__dirname, "commands");
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith(".js"));
+
+for (const file of commandFiles) {
+  const command = require(`./commands/${file}`);
+  bot.commands.set(command.name, command);
+  console.log("Loaded command:", command.name);
+}
+
+
+bot.on("messageCreate", async (message) => {
+  if (message.author.bot) return;
+
+  const args = message.content.split(" ");
+  const commandName = args.shift().toLowerCase();
+
+  const command = bot.commands.get(commandName);
+  if (!command) return;
+
+  try {
+    await command.execute(message, args);
+  } catch (err) {
+    console.error("Command error:", err);
+  }
+});
+
+
+// =========================
 // EXPRESS SERVER
 // =========================
 
@@ -69,30 +103,4 @@ app.post("/upload", upload.single("file"), async (req, res) => {
 
 app.listen(PORT, () => {
   console.log("🚀 Server running on port", PORT);
-});
-
-
-// =========================
-// DISCORD COMMANDS (ALL HERE)
-// =========================
-
-bot.on("messageCreate", async (message) => {
-  if (message.author.bot) return;
-
-  if (message.content === "/game tips") {
-    return message.reply("always check the map before moving! 🗺️");
-  }
-    options.addStringOption(option => {
-      option.setName("war-tips")
-        .setDescription("war-specific tips")
-        .setRequired(true);
-      return option;
-    });
-
-    options.addStringOption(option => {
-      option.setName("general-tips")
-        .setDescription("General game tips")
-        .setRequired(true);
-      return option;
-    });
 });
