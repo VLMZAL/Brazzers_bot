@@ -21,7 +21,7 @@ module.exports = {
 
     if (type === "war") {
       await interaction.reply({ "content": "Here are some war tips:",
-        files: ["/tips/war_tips.png"]
+        files: ["/commands/tips/war_tips.png"]
       });
 
     } else if (type === "general") {
