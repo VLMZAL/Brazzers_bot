@@ -1,4 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
+const {fs} = require("fs");
+const {path} = require("path");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -19,12 +21,14 @@ module.exports = {
     let text;
 
     if (type === "war") {
-      text = "Use the right troops for the right base. For example, if you are attacking a base with a lot of air defenses, use more air troops.";
+      const filePath = path.join(__dirname, "tips/war_text.txt");
+      const tips = fs.readFileSync(filePath, "utf8");
 
     } else if (type === "general") {
-      text = "Here are some general tips for the game.";
+      const filePath = path.join(__dirname, "tips/general_text.txt");
+      const tips = fs.readFileSync(filePath, "utf8");
 
     }
-    await interaction.reply({ content: `Here are some **${type}** tips: ${text}` });
+    await interaction.reply({ content: `Here are some **${type}** tips: ${tips}` });
   }
 };
