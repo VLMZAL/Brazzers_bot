@@ -25,6 +25,6 @@ module.exports = {
       text = "Here are some general tips for the game.";
 
     }
-    await interaction.reply("this ar all the" + type + " tips: " + text);
+    await interaction.reply({ content: `This are all the **${type}** tips: ${text}` });
   }
 };
