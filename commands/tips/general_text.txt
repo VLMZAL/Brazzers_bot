@@ -1,75 +1,42 @@
-🧠 1. Substats and Builds
-
+Substats and Builds
 Max Substats
-
-Crit Chance 12
-Crit Damage 80
-Attack Speed 40
-Double Chance 20
-Damage 15
-Skill Damage 30
-Ranged Damage 15
-Melee Damage 50
-Block 5
-Lifesteal 20
-Regen 4
-Cooldown 7
-Health 15
+Crit Chance 12, Crit Damage 80, Attack Speed 40, Double Chance 20, Damage 15, Skill Damage 30, Ranged Damage 15, Melee Damage 50, Block 5, Lifesteal 20, Regen 4, Cooldown 7, Health 15
 
 Substat Effects
-
-Damage:Increases all weapon and skill damage
-Health: Increases your base health by x %
-Ranged Damage: Only affects ranged weapons
-Melee Damage: Only affects melee weapons (useless without one equipped)
-Skill Damage: Boosts skill power and buff skill HP and damage
-Skill Cooldown: Reduces activation time of skills.
-Health Regen: Restores HP every second, strong early on
-Lifesteal: Converts a percentage of weapon damage into HP (pairs with Attack Speed and Double Chance)
-Attack Speed: Faster attacks mean more hits and more lifesteal
-Double Chance: Chance for main weapon to strike twice
-Crit Chance: Chance to land a critical hit (base 120% damage)
-Crit Damage: Raises crit multiplier, combine with Crit Chance
-Block: Chance to block incoming hits
-💡 Ranged weapons sometimes outperform melee unless you have specific bonuses or prefer melee playstyle.
-
-⸻
+Damage increases all weapon and skill damage.
+Health increases base HP.
+Ranged Damage affects only ranged weapons.
+Melee Damage affects only melee weapons.
+Skill Damage boosts skill power and buff effects.
+Cooldown reduces skill activation time.
+Regen restores HP every second.
+Lifesteal converts weapon damage into HP.
+Attack Speed increases hit frequency.
+Double Chance gives a chance to strike twice.
+Crit Chance and Crit Damage increase critical hit power.
+Block reduces incoming hits.
+Ranged weapons often outperform melee unless you have melee bonuses.
 
 Recommended Builds
-
 Beginner Build (Early–Mid Game)
-Priority order:
-• Health Regen 20%+
-• Double Chance 80%+
-• Attack Speed 100%+
-• Lifesteal 30%+
+Health Regen 20%+
+Double Chance 80%+
+Attack Speed 100%+
+Lifesteal 30%+
 
-Higher Health Regen is very strong early on, especially for regular stages and dungeons, as it provides consistent survivability.
-However, Regen becomes less effective in PvP, so try to balance it with the other stats for maximum efficiency. 
-Full regen (40%+) builds can work however, but always keep an eye on your PvP performance. 
+Regen is strong early but weaker in PvP. With Quantum gear, Regen becomes less effective and Lifesteal + Crit becomes stronger.
 
-Once you reach Quantum gear (2 substats per item), Regen starts to fall off hard. At that point, combining Lifesteal with Crit becomes much stronger — a single crit hit can often heal half your HP or more.
-
----
-
-Balanced Build (All-Rounder)
-• Attack Speed 100%+
-• Lifesteal 40%+
-• Double Chance 80%+
-• Damage
-
-A very solid setup for most content that scales well into later stages.
-
----
+Balanced Build
+Attack Speed 100%+
+Lifesteal 40%+
+Double Chance 80%+
+Damage
 
 Endgame Crit Build
-• Crit Chance + Crit Damage
-• Best once dual-substat gear and pets are unlocked
-
+Crit Chance + Crit Damage
 Example:
-
 40+ Crit Chance
 350+ Crit Damage
 30+ Lifesteal
-100 Double Chance 
+100 Double Chance
 100+ Attack Speed
