@@ -1,13 +1,4 @@
 // =========================
-// ENV VARIABLES
-// =========================
-
-const DISCORD_TOKEN = process.env.DISCORD_TOKEN;
-const CHANNEL_ID = process.env.CHANNEL_ID;
-const ROLE_ID = process.env.ROLE_ID;
-const PORT = process.env.PORT || 3000;
-
-// =========================
 // IMPORTS
 // =========================
 

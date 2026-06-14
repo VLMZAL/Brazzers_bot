@@ -1,3 +1,14 @@
+// =========================
+// ENV VARIABLES
+// =========================
+
+const DISCORD_TOKEN = process.env.DISCORD_TOKEN;
+const CHANNEL_ID = process.env.CHANNEL_ID;
+const ROLE_ID = process.env.VERIFIED_ROLE_ID;
+const PORT = process.env.PORT || 3000;
+const AppID = process.env.AppID;
+const SERVER_ID = process.env.SERVER_ID;
+
 const { Client, GatewayIntentBits, Collection, REST, Routes } = require("discord.js");
 const fs = require("fs");
 const path = require("path");
@@ -24,12 +35,12 @@ for (const file of commandFiles) {
 }
 
 async function registerCommands() {
-    const rest = new REST({ version: "10" }).setToken(process.env.Token);
+    const rest = new REST({ version: "10" }).setToken(process.env.DISCORD_TOKEN);
 
     try {
         console.log("Updating commands...");
         await rest.put(
-            Routes.applicationCommands(process.env.APP_ID),
+            Routes.applicationGuildCommands(process.env.AppID, process.env.SERVER_ID),
             { body: commandsJSON }
         );
         console.log("Commands updated!");
