@@ -1,6 +1,19 @@
 Substats and Builds
+
 Max Substats
-Crit Chance 12, Crit Damage 80, Attack Speed 40, Double Chance 20, Damage 15, Skill Damage 30, Ranged Damage 15, Melee Damage 50, Block 5, Lifesteal 20, Regen 4, Cooldown 7, Health 15
+Crit Chance 12,
+Crit Damage 80,
+Attack Speed 40,
+Double Chance 20,
+Damage 15,
+Skill Damage 30, 
+Ranged Damage 15, 
+Melee Damage 50, 
+Block 5, 
+Lifesteal 20, 
+Regen 4, 
+Cooldown 7, 
+Health 15
 
 Substat Effects
 Damage increases all weapon and skill damage.

@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("tips")
+    .setName("game tips")
     .setDescription("All tips")
     .addStringOption(option =>
       option.setName("type")
