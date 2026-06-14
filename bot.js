@@ -45,11 +45,15 @@ app.post("/upload", upload.single("file"), async (req, res) => {
 
     // Remove original file
     fs.unlinkSync(inputPath);
+   
+    channel = await bot.channels.fetch(CHANNEL_ID);
+      
 
-    const channel = await bot.channels.fetch(CHANNEL_ID);
+    console.log("📤 Invio messaggio al canale...");
+
 
     await channel.send({
-      content: `<@&RoleId> **War Status Update**`,
+      content: `<@&${ROLE_ID}> **War Status Update**`,
       files: [outputPath]
     });
 
