@@ -1,7 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 const fs = require("fs");
 const path = require("path");
-let tips;
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("tips")
@@ -18,15 +17,15 @@ module.exports = {
   
     async execute(interaction) {
     const type = interaction.options.getString("type");
-    let text;
+    let tips;
 
     if (type === "war") {
       const filePath = path.join(__dirname, "tips/war_text.txt");
-      const tips = fs.readFileSync(filePath, "utf8");
+      tips = fs.readFileSync(filePath, "utf8");
 
     } else if (type === "general") {
       const filePath = path.join(__dirname, "tips/general_text.txt");
-      const tips = fs.readFileSync(filePath, "utf8");
+      tips = fs.readFileSync(filePath, "utf8");
 
     }
     await interaction.reply({ content: `Here are some **${type}** tips: ${tips}` });
