@@ -12,7 +12,6 @@ module.exports = {
           { name: "War", value: "war" },
           { name: "General", value: "general" }
         )
-    
       ),
   
     async execute(interaction) {
@@ -21,9 +20,11 @@ module.exports = {
 
     if (type === "war") {
       text = "Use the right troops for the right base. For example, if you are attacking a base with a lot of air defenses, use more air troops.";
+
     } else if (type === "general") {
       text = "Here are some general tips for the game.";
 
-    await interaction.reply("⚔️ " + type + " tip: " + text);
+    }
+    await interaction.reply("this ar all the" + type + " tips: " + text);
   }
-}};
+};
