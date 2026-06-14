@@ -2,7 +2,7 @@
 // ENV VARIABLES
 // =========================
 
-const { DISCORD_TOKEN, AppID, SERVER_ID } = process.env;
+const { DISCORD_TOKEN, APPID, SERVER_ID } = process.env;
 
 const { Client, GatewayIntentBits, Collection, REST, Routes } = require("discord.js");
 const fs = require("fs");
@@ -35,7 +35,7 @@ async function registerCommands() {
     try {
         console.log("Updating commands...");
         await rest.put(
-            Routes.applicationGuildCommands(process.env.AppID, process.env.SERVER_ID),
+            Routes.applicationGuildCommands(process.env.APPID, process.env.SERVER_ID),
             { body: commandsJSON }
         );
         console.log("Commands updated!");

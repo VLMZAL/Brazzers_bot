@@ -2,7 +2,7 @@
 // IMPORTS
 // =========================
 
-const { DISCORD_TOKEN, CHANNEL_ID, ROLE_ID, PORT } = process.env;
+const { DISCORD_TOKEN, CHANNEL_ID, VERIFIED_ROLE_ID, PORT } = process.env;
 const express = require("express");
 const multer = require("multer");
 const fs = require("fs");
@@ -46,7 +46,7 @@ app.post("/upload", upload.single("file"), async (req, res) => {
     const channel = await bot.channels.fetch(CHANNEL_ID);
 
     await channel.send({
-      content: `<@&${ROLE_ID}> **War Status Update**`,
+      content: `<@&${VERIFIED_ROLE_ID}> **War Status Update**`,
       files: [outputPath]
     });
 
