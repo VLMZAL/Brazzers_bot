@@ -4,7 +4,7 @@ const path = require("path");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("game_tips")
-    .setDescription("In game tips")
+    .setDescription("In-game tips")
     .addStringOption(option =>
       option.setName("type")
         .setDescription("Select the type of tip you want")
