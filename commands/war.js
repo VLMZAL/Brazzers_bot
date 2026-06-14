@@ -18,12 +18,15 @@ module.exports = {
     async execute(interaction) {
     const type = interaction.options.getString("type");
     let tips;
+    let imagePath;
 
     if (type === "war") {
-      await interaction.reply({ "content": "Here are some war tips:",
-        files: ["/commands/tips/war_tips.png"]
-      });
+      imagePath = path.join(__dirname, "tips/war_tips.png");
 
+      await interaction.reply({
+        content: "Here are some war tips:",
+        files: [imagePath]
+      });
     } else if (type === "general") {
       const filePath = path.join(__dirname, "tips/general_text.txt");
       tips = fs.readFileSync(filePath, "utf8");
