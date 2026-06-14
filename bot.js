@@ -51,7 +51,7 @@ app.post("/upload", upload.single("file"), async (req, res) => {
     // Remove original file
     fs.unlinkSync(inputPath);
    
-    channel = await bot.channels.fetch(CHANNEL_ID);
+    let channel = await bot.channels.fetch(CHANNEL_ID);
       
 
     console.log("📤 Invio messaggio al canale...");
