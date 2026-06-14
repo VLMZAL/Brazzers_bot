@@ -1,6 +1,13 @@
-DISCORD_TOKEN= process.env.DISCORD_TOKEN;
-CHANNEL_ID = process.env.CHANNEL_ID;
-PORT = process.env.PORT || 3000;
+require("dotenv").config();
+
+// =========================
+// ENV VARIABLES
+// =========================
+
+const DISCORD_TOKEN = process.env.DISCORD_TOKEN;
+const CHANNEL_ID = process.env.CHANNEL_ID;
+const ROLE_ID = process.env.ROLE_ID;
+const PORT = process.env.PORT || 3000;
 
 // =========================
 // IMPORTS
@@ -38,7 +45,7 @@ app.post("/upload", upload.single("file"), async (req, res) => {
     const inputPath = req.file.path;
     const outputPath = inputPath + ".png";
 
-    // Convert to real PNG
+    // Convert to PNG
     await sharp(inputPath)
       .png()
       .toFile(outputPath);
@@ -49,7 +56,7 @@ app.post("/upload", upload.single("file"), async (req, res) => {
     const channel = await bot.channels.fetch(CHANNEL_ID);
 
     await channel.send({
-      content: `<@&RoleId> **War Status Update**`,
+      content: `<@&${ROLE_ID}> **War Status Update**`,
       files: [outputPath]
     });
 
