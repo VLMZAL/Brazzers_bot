@@ -2,12 +2,7 @@
 // ENV VARIABLES
 // =========================
 
-const DISCORD_TOKEN = process.env.DISCORD_TOKEN;
-const CHANNEL_ID = process.env.CHANNEL_ID;
-const ROLE_ID = process.env.VERIFIED_ROLE_ID;
-const PORT = process.env.PORT || 3000;
-const AppID = process.env.AppID;
-const SERVER_ID = process.env.SERVER_ID;
+const { DISCORD_TOKEN, AppID, SERVER_ID } = process.env;
 
 const { Client, GatewayIntentBits, Collection, REST, Routes } = require("discord.js");
 const fs = require("fs");
