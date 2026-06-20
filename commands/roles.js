@@ -34,12 +34,12 @@ module.exports = {
 
         if (sub === "add") {
             await member.roles.add(role);
-            return interaction.reply(`<@${member.id}> now has <@&${role.id}>`);
+            return interaction.reply(`<@${member.id}> has been assigned the role <@&${role.id}>`);
         }
 
         if (sub === "remove") {
             await member.roles.remove(role);
-            return interaction.reply(`<@&${role.id}> removed from <@${member.id}>`);
+            return interaction.reply(`the role <@${role.id}> has been removed from the user <@&${member.id}>`);
         }
     }
 };
