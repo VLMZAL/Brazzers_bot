@@ -3,16 +3,16 @@ const { SlashCommandBuilder } = require("discord.js");
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("role")
-        .setDescription("Assign or remove a role")
+        .setDescription("Manage user roles")
         .addSubcommand(sub =>
             sub
                 .setName("add")
                 .setDescription("Add a role to a user")
                 .addUserOption(opt =>
-                    opt.setName("user").setDescription("User").setRequired(true)
+                    opt.setName("user").setDescription("Select the user").setRequired(true)
                 )
                 .addRoleOption(opt =>
-                    opt.setName("role").setDescription("Role").setRequired(true)
+                    opt.setName("role").setDescription("Select the role").setRequired(true)
                 )
         )
         .addSubcommand(sub =>
@@ -20,10 +20,10 @@ module.exports = {
                 .setName("remove")
                 .setDescription("Remove a role from a user")
                 .addUserOption(opt =>
-                    opt.setName("user").setDescription("User").setRequired(true)
+                    opt.setName("user").setDescription("Select the user").setRequired(true)
                 )
                 .addRoleOption(opt =>
-                    opt.setName("role").setDescription("Role").setRequired(true)
+                    opt.setName("role").setDescription("Select the role").setRequired(true)
                 )
         ),
 
@@ -33,13 +33,14 @@ module.exports = {
         const sub = interaction.options.getSubcommand();
 
         if (sub === "add") {
-            await member.roles.add(role);
-            return interaction.reply(`<@${member.id}> has been assigned the role <@&${role.id}>`);
-        }
 
-        if (sub === "remove") {
+            await member.roles.add(role);
+            return interaction.reply(`<@${member.id}> now has <@&${role.id}>`);
+
+        } else if (sub === "remove") {
+            
             await member.roles.remove(role);
-            return interaction.reply(`the role <@${role.id}> has been removed from the user <@&${member.id}>`);
+            return interaction.reply(`<@&${role.id}> removed from <@${member.id}>`);
         }
     }
 };
