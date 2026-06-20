@@ -3,44 +3,40 @@ const { SlashCommandBuilder } = require("discord.js");
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("role")
-        .setDescription("Manage user roles")
-        .addSubcommand(sub =>
-            sub
-                .setName("add")
-                .setDescription("Add a role to a user")
-                .addUserOption(opt =>
-                    opt.setName("user").setDescription("Select the user").setRequired(true)
-                )
-                .addRoleOption(opt =>
-                    opt.setName("role").setDescription("Select the role").setRequired(true)
+        .setDescription("Add or remove a role from a user")
+        .addStringOption(opt =>
+            opt.setName("action")
+                .setDescription("add or remove")
+                .setRequired(true)
+                .addChoices(
+                    { name: "add", value: "add" },
+                    { name: "remove", value: "remove" }
                 )
         )
-        .addSubcommand(sub =>
-            sub
-                .setName("remove")
-                .setDescription("Remove a role from a user")
-                .addUserOption(opt =>
-                    opt.setName("user").setDescription("Select the user").setRequired(true)
-                )
-                .addRoleOption(opt =>
-                    opt.setName("role").setDescription("Select the role").setRequired(true)
-                )
+        .addUserOption(opt =>
+            opt.setName("user")
+                .setDescription("Select the user")
+                .setRequired(true)
+        )
+        .addRoleOption(opt =>
+            opt.setName("role")
+                .setDescription("Select the role")
+                .setRequired(true)
         ),
 
     async execute(interaction) {
+        const action = interaction.options.getString("action");
         const member = interaction.options.getMember("user");
         const role = interaction.options.getRole("role");
-        const sub = interaction.options.getSubcommand();
 
-        if (sub === "add") {
-
+        if (action === "add") {
             await member.roles.add(role);
             return interaction.reply(`<@${member.id}> now has <@&${role.id}>`);
+        }
 
-        } else if (sub === "remove") {
-            
+        if (action === "remove") {
             await member.roles.remove(role);
-            return interaction.reply(`<@&${role.id}> removed from <@${member.id}>`);
+            return interaction.reply(`Removed <@&${role.id}> from <@${member.id}>`);
         }
     }
 };
