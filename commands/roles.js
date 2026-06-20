@@ -34,18 +34,19 @@ module.exports = {
         const member = interaction.options.getMember("user");
         const role = interaction.options.getRole("role");
         const subcommand = interaction.options.getSubcommand();
+        let reply = "";
 
         if (subcommand === "add") {
             await member.roles.add(role);
-            let reply = "";
+            
             reply += `<@${member.id}> has been assigned the role <@&${role.id}>! `;
         } else if (subcommand === "remove") {
             await member.roles.remove(role);
-            let reply = "";
+            
             reply += `the role <@${role.id}> has been removed from the user <@&${member.id}>! `;
 
         } else {
-            let reply = "";
+            
             reply += `Invalid argument please use either "add" or "remove"`;
         }
 
