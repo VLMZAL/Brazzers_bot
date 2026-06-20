@@ -1,55 +1,45 @@
-const { SlashCommandBuilder, User } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("role")
-        .setDescription("Assign a role to a user")
-        .addSubcommand(subcommand =>
-            subcommand
+        .setDescription("Assign or remove a role")
+        .addSubcommand(sub =>
+            sub
                 .setName("add")
                 .setDescription("Add a role to a user")
+                .addUserOption(opt =>
+                    opt.setName("user").setDescription("User").setRequired(true)
+                )
+                .addRoleOption(opt =>
+                    opt.setName("role").setDescription("Role").setRequired(true)
+                )
         )
-        .addSubcommand(subcommand =>
-            subcommand
+        .addSubcommand(sub =>
+            sub
                 .setName("remove")
                 .setDescription("Remove a role from a user")
-        )
-        .addUserOption(option =>
-            option
-                .setName("user")
-                .setDescription("Select the user")
-                .setRequired(true)
-                    
-        )
-        .addRoleOption(option =>
-            option
-                .setName("role")
-                .setDescription("Select the role to assign")
-                .setRequired(true)
+                .addUserOption(opt =>
+                    opt.setName("user").setDescription("User").setRequired(true)
+                )
+                .addRoleOption(opt =>
+                    opt.setName("role").setDescription("Role").setRequired(true)
+                )
         ),
-
-        
 
     async execute(interaction) {
         const member = interaction.options.getMember("user");
         const role = interaction.options.getRole("role");
-        const subcommand = interaction.options.getSubcommand();
-        let reply = "";
+        const sub = interaction.options.getSubcommand();
 
-        if (subcommand === "add") {
+        if (sub === "add") {
             await member.roles.add(role);
-            
-            reply += `<@${member.id}> has been assigned the role <@&${role.id}>! `;
-        } else if (subcommand === "remove") {
-            await member.roles.remove(role);
-            
-            reply += `the role <@${role.id}> has been removed from the user <@&${member.id}>! `;
-
-        } else {
-            
-            reply += `Invalid argument please use either "add" or "remove"`;
+            return interaction.reply(`<@${member.id}> now has <@&${role.id}>`);
         }
 
-        await interaction.reply(reply);
+        if (sub === "remove") {
+            await member.roles.remove(role);
+            return interaction.reply(`<@&${role.id}> removed from <@${member.id}>`);
+        }
     }
 };
