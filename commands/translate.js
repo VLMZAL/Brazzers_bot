@@ -22,23 +22,15 @@ module.exports = {
 
         await interaction.deferReply();
 
-        const res = await fetch("https://libretranslate.com/translate", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                q: text,
-                source: "auto",
-                target: target,
-                format: "text"
-            })
-        });
+        const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=auto|${target}`;
 
+        const res = await fetch(url);
         const data = await res.json();
 
-        if (!data.translatedText) {
+        if (!data.responseData || !data.responseData.translatedText) {
             return interaction.editReply("Translation failed.");
         }
 
-        return interaction.editReply(`**Translated:**\n${data.translatedText}`);
+        return interaction.editReply(`**Translated:**\n${data.responseData.translatedText}`);
     }
 };
