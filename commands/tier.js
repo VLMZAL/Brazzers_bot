@@ -55,12 +55,15 @@ module.exports = {
             await interaction.reply({ content: "Select a tier to remove:", components: [row] });
             const filter = i => i.customId === "tier-remove" && i.user.id === interaction.user.id;
             const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 });
-            const selection = await collector.first();
-            if (!selection) {
-                return interaction.reply("No tier selected.");
-            }
-            await member.roles.remove(selection.values[0]);
-            return interaction.reply(`Removed <@&${selection.values[0]}> from <@${member.id}>`);
+            
+            collector.on("collect", async i => {
+                const tierID = i.values[0];
+                const tier = interaction.guild.roles.cache.get(tierID);
+                await member.roles.remove(tier);
+                await i.update({ 
+                    content: `Removed <@&${tier.id}> from <@${member.id}>`, components: [] 
+                });
+            });
         }
     }
 };
