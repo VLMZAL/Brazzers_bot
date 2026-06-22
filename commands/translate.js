@@ -51,7 +51,7 @@ module.exports = {
         const data2 = await res2.json();
 
         return interaction.editReply(
-            `last <@${lastMessage.interaction.user.id}> message got translated **${source} | ${target}**:\n${data2.responseData.translatedText}`
+            `last ${lastMessage.interaction.username}'s message got translated **${source} | ${target}**:\n${data2.responseData.translatedText}`
         );
 
         } else if (!data.responseData || !data.responseData.translatedText) {
