@@ -21,22 +21,44 @@ module.exports = {
                 .setRequired(true)
         ),
 
+
     async execute(interaction) {
+        const last = interaction.options.getString("text").toLowerCase();
         const text = interaction.options.getString("text");
         const source = interaction.options.getString("from").toUpperCase();
         const target = interaction.options.getString("to").toUpperCase();
+        const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${source}|${target}`;
 
         await interaction.deferReply();
-
-        const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${source}|${target}`;
 
         const res = await fetch(url);
         const data = await res.json();
 
-        if (!data.responseData || !data.responseData.translatedText) {
-            return interaction.editReply("Translation failed.");
+        if (last === "last message") {
+        const messages = await interaction.channel.messages.fetch({ limit: 2 });
+        const lastMessage = messages.last(); // prende il messaggio prima del comando
+
+        if (!lastMessage) {
+            return interaction.editReply("No previous message found.");
         }
 
-        return interaction.editReply(`<@${interaction.user.id}> Translated **${source} | ${target}**:\n${data.responseData.translatedText}`);
+        const url2 = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(lastMessage.content)}&langpair=${source}|${target}`;
+        const res2 = await fetch(url2);
+        const data2 = await res2.json();
+
+        return interaction.editReply(
+            `the last message got translated **${source} | ${target}**:\n${data2.responseData.translatedText}`
+        );
+
+        } else if (!data.responseData || !data.responseData.translatedText) {
+
+            return interaction.editReply("Translation failed.");
+
+        } else {
+
+            return interaction.editReply(
+            `<@${interaction.user.id}> translated **${source} | ${target}**:\n${data.responseData.translatedText}`
+        );
     }
+}
 };
