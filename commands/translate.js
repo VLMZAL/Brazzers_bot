@@ -10,6 +10,11 @@ module.exports = {
                 .setDescription("Text to translate")
                 .setRequired(true)
         )
+        .addAttachmentOption(opt =>
+            opt.setName("from")
+                .setDescription("starting lanuage (en, it, es, fr...)")
+                .setRequired(true)
+        )
         .addStringOption(opt =>
             opt.setName("to")
                 .setDescription("Target language (en, it, es, fr...)")
@@ -18,11 +23,12 @@ module.exports = {
 
     async execute(interaction) {
         const text = interaction.options.getString("text");
+        const source = interaction.options.getString("from");
         const target = interaction.options.getString("to");
 
         await interaction.deferReply();
 
-        const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${target}`;
+        const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${source}|${target}`;
 
         const res = await fetch(url);
         const data = await res.json();
