@@ -35,11 +35,14 @@ module.exports = {
         }
 
         if (action === "remove") {
-            const roles = member.roles.cache.filter(r => r.id !== interaction.guild.id);
-
-            if (role.size === 0) {
-                return interaction.reply(`<@${member.id}> does not have any roles`);
+            if (!member.roles.cache.has(role.id)) {
+            return interaction.reply(`<@${member.id}> does not have <@&${role.id}>`);
             }
+
+            await member.roles.remove(role);
+            return interaction.reply(`Removed <@&${role.id}> from <@${member.id}>`);
+        
+    
 
             const menu = new StringSelectMenuBuilder()
                 .setCustomId("role-remove")
