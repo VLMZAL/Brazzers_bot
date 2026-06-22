@@ -22,6 +22,7 @@ module.exports = {
         ),
 
     async execute(interaction) {
+        const user = interaction.user();
         const text = interaction.options.getString("text");
         const source = interaction.options.getString("from").toUpperCase();
         const target = interaction.options.getString("to").toUpperCase();
@@ -37,6 +38,6 @@ module.exports = {
             return interaction.editReply("Translation failed.");
         }
 
-        return interaction.editReply(`Translated **${source} | ${target}**:\n${data.responseData.translatedText}`);
+        return interaction.editReply(`${user} Translated **${source} | ${target}**:\n${data.responseData.translatedText}`);
     }
 };
