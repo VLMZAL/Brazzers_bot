@@ -12,7 +12,7 @@ const TIERS = [
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("tier-assign")
-        .setDescription("Assign a tier to a user (removes old tier automatically)")
+        .setDescription("Assign a tier to a user")
         .addUserOption(opt =>
             opt.setName("user")
                 .setDescription("Select the user")
@@ -41,7 +41,7 @@ module.exports = {
         await member.roles.add(newTier);
 
         return interaction.reply(
-            `Assigned <@&${newTier.id}> to <@${member.id}> (old tiers removed)`
+            `Assigned <@&${newTier.id}> to <@${member.id}>`
         );
     }
 };
