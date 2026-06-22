@@ -10,7 +10,7 @@ module.exports = {
                 .setDescription("Text to translate")
                 .setRequired(true)
         )
-        .addAttachmentOption(opt =>
+        .addStringOption(opt =>
             opt.setName("from")
                 .setDescription("starting lanuage (en, it, es, fr...)")
                 .setRequired(true)
