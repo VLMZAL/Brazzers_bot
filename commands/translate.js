@@ -22,7 +22,7 @@ module.exports = {
         ),
 
     async execute(interaction) {
-        const user = interaction.user();
+        const user = interaction.options.getMember("user");
         const text = interaction.options.getString("text");
         const source = interaction.options.getString("from").toUpperCase();
         const target = interaction.options.getString("to").toUpperCase();
