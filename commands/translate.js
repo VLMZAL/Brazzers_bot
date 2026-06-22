@@ -37,6 +37,6 @@ module.exports = {
             return interaction.editReply("Translation failed.");
         }
 
-        return interaction.editReply(`Translated **${source}**|**${target}**:\n${data.responseData.translatedText}`);
+        return interaction.editReply(`Translated **${source} | ${target}**:\n${data.responseData.translatedText}`);
     }
 };
