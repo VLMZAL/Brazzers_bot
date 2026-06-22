@@ -22,7 +22,7 @@ module.exports = {
 
         await interaction.deferReply();
 
-        const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=auto|${target}`;
+        const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${target}`;
 
         const res = await fetch(url);
         const data = await res.json();
