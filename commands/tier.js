@@ -25,7 +25,7 @@ module.exports = {
         .addRoleOption(opt =>
             opt.setName("tier")
                 .setDescription("Select the tier (only for add)")
-                .setRequired(false) 
+                .setRequired(false)
         ),
 
     async execute(interaction) {
@@ -33,7 +33,6 @@ module.exports = {
         const member = interaction.options.getMember("user");
         const tier = interaction.options.getRole("tier");
 
-    
         if (action === "add") {
             if (!tier) {
                 return interaction.reply("You must select a tier to add.");
@@ -43,9 +42,10 @@ module.exports = {
             return interaction.reply(`<@${member.id}> now has <@&${tier.id}>`);
         }
 
-
         if (action === "remove") {
- 
+            // DEBUG: logga i ruoli dell'utente
+            console.log("User roles:", member.roles.cache.map(r => `${r.name} (${r.id})`));
+
             const roles = member.roles.cache.filter(r => r.id !== interaction.guild.id);
 
             if (roles.size === 0) {
