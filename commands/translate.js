@@ -23,7 +23,10 @@ module.exports = {
 
 
     async execute(interaction) {
-        const last = interaction.options.getString("text").toLowerCase();
+        const last = interaction.options.getString("text")
+            .toLowerCase()
+            .trim()
+            .replace(/\s+/g, " ");
         const text = interaction.options.getString("text");
         const source = interaction.options.getString("from").toUpperCase();
         const target = interaction.options.getString("to").toUpperCase();
@@ -34,9 +37,9 @@ module.exports = {
         const res = await fetch(url);
         const data = await res.json();
 
-        if (last === "last message") {
+        if (last === "last message" || last === "last") {
         const messages = await interaction.channel.messages.fetch({ limit: 2 });
-        const lastMessage = messages.last(); // prende il messaggio prima del comando
+        const lastMessage = messages.last();
 
         if (!lastMessage) {
             return interaction.editReply("No previous message found.");
