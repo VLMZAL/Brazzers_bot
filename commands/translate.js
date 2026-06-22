@@ -40,6 +40,7 @@ module.exports = {
         if (last === "last message" || last === "last") {
         const messages = await interaction.channel.messages.fetch({ limit: 2 });
         const lastMessage = messages.last();
+        const memberId = lastMessage.member?.id;
 
         if (!lastMessage) {
             return interaction.editReply("No previous message found.");
@@ -50,7 +51,7 @@ module.exports = {
         const data2 = await res2.json();
 
         return interaction.editReply(
-            `the last message got translated **${source} | ${target}**:\n${data2.responseData.translatedText}`
+            `<@${memberId}> the last message got translated **${source} | ${target}**:\n${data2.responseData.translatedText}`
         );
 
         } else if (!data.responseData || !data.responseData.translatedText) {
