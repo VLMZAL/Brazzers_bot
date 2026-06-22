@@ -35,7 +35,7 @@ module.exports = {
         }
 
         if (action === "remove") {
-            const tier = member.roles.cache.filter(r => r.id === interaction.guild.id);
+            const roles = member.roles.cache.filter(r => r.id !== interaction.guild.id);
 
             if (tier.size === 0) {
                 return interaction.reply(`<@${member.id}> does not have any tiers`);
