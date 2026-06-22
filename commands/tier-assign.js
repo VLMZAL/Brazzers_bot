@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { ROLE_ID_R1, ROLE_ID_R2, ROLE_ID_R3, ROLE_ID_R4, ROLE_ID_R5 } = process.env;
+const { ROLE_ID_R1, ROLE_ID_R2, ROLE_ID_R3, ROLE_ID_R4, ROLE_ID_R5, VERIFIED_ROLE_ID } = process.env;
 
 const TIERS = [
     ROLE_ID_R1,
@@ -35,6 +35,8 @@ module.exports = {
         for (const tierId of TIERS) {
             if (member.roles.cache.has(tierId)) {
                 await member.roles.remove(tierId);
+            } else {
+                await member.roles.add(VERIFIED_ROLE_ID);
             }
         }
 
